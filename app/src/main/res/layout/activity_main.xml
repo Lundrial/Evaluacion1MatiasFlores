@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical"
+        android:id="@+id/layout"
+        android:padding="16dp"
+        tools:context=".MainActivity">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Datos de Tarjeta"
+            android:textSize="12sp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/primaryText"
+            tools:ignore="HardcodedText" />
+        <EditText
+            android:id="@+id/et_nombres"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:hint="Nombres"
+            android:inputType="textPersonName"
+            android:textColorHint="@color/mainText"
+            tools:ignore="HardcodedText"
+            android:importantForAutofill="no" />
+        <EditText
+            android:id="@+id/et_apellidos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Apellidos"
+            android:inputType="textPersonName"
+            android:layout_marginTop="5dp"
+            android:textColorHint="@color/mainText"
+            tools:ignore="HardcodedText"
+            android:importantForAutofill="no" />
+        <EditText
+            android:id="@+id/et_numtarjeta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Numero de Tarjeta"
+            android:inputType="number"
+            android:maxLength="16"
+            android:layout_marginTop="5dp"
+            android:textColorHint="@color/mainText"
+            tools:ignore="HardcodedText"
+            android:importantForAutofill="no" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp">
+            <EditText
+                android:id="@+id/et_mes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Mes"
+                android:inputType="number"
+                android:maxLength="2"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:textColorHint="@color/mainText"
+                tools:ignore="HardcodedText"
+                android:importantForAutofill="no" />
+            <EditText
+                android:id="@+id/et_año"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Año"
+                android:inputType="number"
+                android:maxLength="4"
+                android:layout_marginRight="5dp"
+                android:textColorHint="@color/mainText"
+                android:layout_weight="1"
+                tools:ignore="HardcodedText"
+                android:importantForAutofill="no" />
+            <EditText
+                android:id="@+id/et_CVV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="CVV"
+                android:inputType="numberPassword"
+                android:maxLength="3"
+                android:layout_weight="1"
+                android:textColorHint="@color/mainText"
+                tools:ignore="HardcodedText"
+                android:importantForAutofill="no" />
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Direccion"
+            android:textSize="12sp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/primaryText"
+            tools:ignore="HardcodedText" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center">
+
+            <EditText
+                android:id="@+id/et_calle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                android:layout_marginRight="5dp"
+                android:hint="Calle"
+                android:inputType="text"
+                android:importantForAutofill="no"
+                android:textColorHint="@color/mainText"
+                tools:ignore="HardcodedText" />
+            <EditText
+                android:id="@+id/et_callenum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:hint="#Numero"
+                android:maxLength="6"
+                android:inputType="number"
+                android:importantForAutofill="no"
+                android:textColorHint="@color/mainText"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
+        <EditText
+            android:id="@+id/et_ciudad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ciudad"
+            android:inputType="text"
+            android:importantForAutofill="no"
+            android:textColorHint="@color/mainText"
+            tools:ignore="HardcodedText" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:textColorHint="@color/mainText"
+            android:layout_gravity="center">
+
+            <EditText
+                android:id="@+id/et_estado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:hint="Estado"
+                android:inputType="text"
+                android:layout_marginRight="5dp"
+                android:textColorHint="@color/mainText"
+                android:importantForAutofill="no"
+                tools:ignore="HardcodedText" />
+            <EditText
+                android:id="@+id/et_postal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:hint="Codigo Postal"
+                android:inputType="number"
+                android:textColorHint="@color/mainText"
+                android:importantForAutofill="no"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
+        <Button
+            android:id="@+id/btn_guardar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="Guardar"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+</ScrollView>
