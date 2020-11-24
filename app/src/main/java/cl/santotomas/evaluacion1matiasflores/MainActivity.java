@@ -9,13 +9,13 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String EXTRA_NOMBRE = "cl.santotomas.evaluacion1matiasflores.EXTRA_NOMBRE";
-    public static final String EXTRA_NUMTARJETA = "cl.santotomas.evaluacion1matiasflores.EXTRA_NUMTARJETA";
-    public static final String EXTRA_FECHA = "cl.santotomas.evaluacion1matiasflores.EXTRA_FECHA";
     private EditText etNombres, etApellidos, etNumtarjeta, etMes, etAño, etCVV, etCalle, etCallenum, etCiudad, etEstado, etPostal;
-    private Button btnGuardar;
+    private Button btnGuardar, btnVer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +34,30 @@ public class MainActivity extends AppCompatActivity {
         etEstado = findViewById(R.id.et_estado);
         etPostal = findViewById(R.id.et_postal); // ..
         btnGuardar = findViewById(R.id.btn_guardar); // Verificar el boton
+        btnVer = findViewById(R.id.btn_ver); // Verificar el boton
         btnGuardar.setEnabled(false); // Deshabilitar el boton hasta que los campos esten llenos
 
         btnGuardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ModeloTarjeta modeloTarjeta;
+
+                try {
+                    modeloTarjeta = new ModeloTarjeta(-1, etNombres.getText().toString() + " " + etApellidos.getText().toString(), etNumtarjeta.getText().toString(), etMes.getText().toString() + "/" + etAño.getText().toString().substring(2));
+                    Toast.makeText(MainActivity.this, "Tarjeta agregada correctamente", Toast.LENGTH_SHORT).show();
+                } catch(Exception e) {
+                    Toast.makeText(MainActivity.this, "Error al crear tarjeta", Toast.LENGTH_SHORT).show();
+                    modeloTarjeta = new ModeloTarjeta(-1, "error", "error", "error");
+                }
+
+                DatabaseHelper dataBaseHelper = new DatabaseHelper(MainActivity.this);
+
+                boolean success = dataBaseHelper.addTarjeta(modeloTarjeta);
+            }
+        });
+
+        btnVer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openActivity2();
@@ -54,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         etCiudad.addTextChangedListener(confirmacionTextWatcher);
         etEstado.addTextChangedListener(confirmacionTextWatcher);
         etPostal.addTextChangedListener(confirmacionTextWatcher);
+
 
     }
 
@@ -76,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
             String inputEstado = etEstado.getText().toString().trim();
             String inputPostal = etPostal.getText().toString().trim();
 
-            btnGuardar.setEnabled(!inputNombres.isEmpty() && !inputApellidos.isEmpty() && !inputNumTarjeta.isEmpty() && !inputMes.isEmpty() && !inputAño.isEmpty() && !inputCVV.isEmpty() && !inputCalle.isEmpty() && !inputCallenum.isEmpty() && !inputCiudad.isEmpty() && !inputEstado.isEmpty() && !inputPostal.isEmpty());
+            btnGuardar.setEnabled(!inputNombres.isEmpty() && !inputApellidos.isEmpty() && !inputNumTarjeta.isEmpty() && !inputMes.isEmpty() && !inputAño.isEmpty() && !inputCVV.isEmpty() && !inputCalle.isEmpty() && !inputCallenum.isEmpty() && !inputCiudad.isEmpty() && !inputEstado.isEmpty() && !inputPostal.isEmpty() && inputNumTarjeta.length() == 16 && inputAño.length() == 4);
         }
 
         @Override
@@ -86,13 +108,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
     public void openActivity2() {
-        String nombre = etNombres.getText().toString() + " " + etApellidos.getText().toString();
-        String numerotarjeta = etNumtarjeta.getText().toString();
-        String fecha = etMes.getText().toString() + "/" + etAño.getText().toString().substring(2);
         Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra(EXTRA_NOMBRE, nombre);
-        intent.putExtra(EXTRA_NUMTARJETA, numerotarjeta);
-        intent.putExtra(EXTRA_FECHA, fecha);
         startActivity(intent);
     }
 }

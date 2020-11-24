@@ -4,25 +4,29 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.List;
 
 public class DetailActivity extends AppCompatActivity {
-
+        private ListView listView;
+        private TarjetaAdapter mAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        Intent intent = getIntent();
-        String nombre = intent.getStringExtra(MainActivity.EXTRA_NOMBRE);
-        String numtarjeta = intent.getStringExtra(MainActivity.EXTRA_NUMTARJETA);
-        String fecha = intent.getStringExtra(MainActivity.EXTRA_FECHA);
+        DatabaseHelper dataBaseHelper = new DatabaseHelper(DetailActivity.this);
+        List<ModeloTarjeta> todos = dataBaseHelper.getTodas();
 
-        TextView Nombre = (TextView) findViewById(R.id.et_nombre);
-        TextView NumTarjeta = (TextView) findViewById(R.id.et_numtarjeta);
-        TextView Fecha = (TextView) findViewById(R.id.et_fecha);
+        listView = (ListView) findViewById(R.id.lvContact);
 
-        Nombre.setText(nombre);
-        NumTarjeta.setText(numtarjeta);
-        Fecha.setText(fecha);
+        Toast.makeText(DetailActivity.this, "Mostrando Tarjetas Guardadas en BD", Toast.LENGTH_SHORT).show();
+        mAdapter = new TarjetaAdapter(this, todos);
+        listView.setAdapter(mAdapter);
     }
 }
